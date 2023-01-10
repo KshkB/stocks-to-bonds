@@ -1,0 +1,1675 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Bond valuation tutorial &#8212; Bond valuation and stock RROI</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="_static/brand.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Stocks to bonds RROI/B tutorial" href="RROIB_tutorial.html" />
+    <link rel="prev" title="Stock RROI relative to bonds (theory)" href="RROIB_ntbk.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/brand.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Bond valuation and stock RROI</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bond valuation and stock RROI
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="RROIB_ntbk.html">
+   Stock RROI relative to bonds (theory)
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Bond valuation tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="RROIB_tutorial.html">
+   Stocks to bonds RROI/B tutorial
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/KshkB/stocks-to-bonds/master?urlpath=tree/docs/bonds_tutorial.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/KshkB/stocks-to-bonds/tree/gh-pages"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/KshkB/stocks-to-bonds/tree/gh-pages/issues/new?title=Issue%20on%20page%20%2Fbonds_tutorial.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bonds_tutorial.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bond-list">
+   Bond list
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bond-value">
+   Bond Value
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bond-list-with-run-rate">
+   Bond list with Run Rate
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#yield-curve">
+   Yield curve
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Bond valuation tutorial</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bond-list">
+   Bond list
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bond-value">
+   Bond Value
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bond-list-with-run-rate">
+   Bond list with Run Rate
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#yield-curve">
+   Yield curve
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="bond-valuation-tutorial">
+<h1>Bond valuation tutorial<a class="headerlink" href="#bond-valuation-tutorial" title="Permalink to this headline">#</a></h1>
+<p>This is a tutorial describing the functions in the <code class="docutils literal notranslate"><span class="pre">functions.py</span></code> module. These functions are tailored to understanding the valuation of currently listed, investment grade Australian Government Treasury Bonds (eTBs).</p>
+<p><strong>Note.</strong> <em>The payment periods for all eTBs are half-yearly. All figures are expressed, where relevant, in annulaused form.</em></p>
+<section id="bond-list">
+<h2>Bond list<a class="headerlink" href="#bond-list" title="Permalink to this headline">#</a></h2>
+<p>The function <code class="docutils literal notranslate"><span class="pre">etbList_AU()</span></code> in module <code class="docutils literal notranslate"><span class="pre">functions.py</span></code> returns a pandas dataframe comprising the current list of exchange traded Australian Government Treasury Bonds (eTBs). These are obtained from the government website <a class="reference external" href="https://www.australiangovernmentbonds.gov.au/bond-types/exchange-traded-treasury-bonds/list-etbs">here</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functions</span> <span class="kn">import</span> <span class="n">etbList_AU</span>
+
+<span class="n">etblist</span> <span class="o">=</span> <span class="n">etbList_AU</span><span class="p">()</span>
+<span class="n">etblist</span> <span class="o">=</span> <span class="n">etblist</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">etblist</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>maturity</th>
+      <th>coupon</th>
+      <th>ASX_code</th>
+      <th>payDates</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>21-Apr-2023</td>
+      <td>5.50%</td>
+      <td>GSBG23</td>
+      <td>21-Apr, 21-Oct</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>21-Apr-2024</td>
+      <td>2.75%</td>
+      <td>GSBG24</td>
+      <td>21-Apr, 21-Oct</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21-Nov-2024</td>
+      <td>0.25%</td>
+      <td>GSBU24</td>
+      <td>21-May, 21-Nov</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>21-Apr-2025</td>
+      <td>3.25%</td>
+      <td>GSBG25</td>
+      <td>21-Apr, 21-Oct</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>21-Nov-2025</td>
+      <td>0.25%</td>
+      <td>GSBU25</td>
+      <td>21-May, 21-Nov</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>21-Apr-2026</td>
+      <td>4.25%</td>
+      <td>GSBG26</td>
+      <td>21-Apr, 21-Oct</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>21-Sep-2026</td>
+      <td>0.50%</td>
+      <td>GSBQ26</td>
+      <td>21-Sep, 21-Mar</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>21-Apr-2027</td>
+      <td>4.75%</td>
+      <td>GSBG27</td>
+      <td>21-Apr, 21-Oct</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>21-Nov-2027</td>
+      <td>2.75%</td>
+      <td>GSBU27</td>
+      <td>21-Nov, 21-May</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>21-May-2028</td>
+      <td>2.25%</td>
+      <td>GSBI28</td>
+      <td>21-May, 21-Nov</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>21-Nov-2028</td>
+      <td>2.75%</td>
+      <td>GSBU28</td>
+      <td>21-Nov, 21-May</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>21-Apr-2029</td>
+      <td>3.25%</td>
+      <td>GSBG29</td>
+      <td>21-Apr, 21-Oct</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>21-Nov-2029</td>
+      <td>2.75%</td>
+      <td>GSBU29</td>
+      <td>21-Nov, 21-May</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>21-May-2030</td>
+      <td>2.50%</td>
+      <td>GSBI30</td>
+      <td>21-May, 21-Nov</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>21-Dec-2030</td>
+      <td>1.00%</td>
+      <td>GSBW30</td>
+      <td>21-Dec, 21-Jun</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>21-Jun-2031</td>
+      <td>1.50%</td>
+      <td>GSBK31</td>
+      <td>21-Jun, 21-Dec</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>21-Nov-2031</td>
+      <td>1.00%</td>
+      <td>GSBU31</td>
+      <td>21-Nov, 21-May</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>21-May-2032</td>
+      <td>1.25%</td>
+      <td>GSBI32</td>
+      <td>21-May, 21-Nov</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>21-Nov-2032</td>
+      <td>1.75%</td>
+      <td>GSBU32</td>
+      <td>21-May, 21-Nov</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>21-Apr-2033</td>
+      <td>4.50%</td>
+      <td>GSBG33</td>
+      <td>21-Apr, 21-Oct</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>21-Nov-2033</td>
+      <td>3.00%</td>
+      <td>GSBU33</td>
+      <td>21-Nov, 21-May</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>21-May-2034</td>
+      <td>3.75%</td>
+      <td>GSBI34</td>
+      <td>21-May, 21-Nov</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>21-Jun-2035</td>
+      <td>2.75%</td>
+      <td>GSBK35</td>
+      <td>21-Jun, 21-Dec</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>21-Apr-2037</td>
+      <td>3.75%</td>
+      <td>GSBG37</td>
+      <td>21-Apr, 21-Oct</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>21-Jun-2039</td>
+      <td>3.25%</td>
+      <td>GSBK39</td>
+      <td>21-Jun, 21-Dec</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>21-May-2041</td>
+      <td>2.75%</td>
+      <td>GSBI41</td>
+      <td>21-May, 21-Nov</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>21-Mar-2047</td>
+      <td>3.00%</td>
+      <td>GSBE47</td>
+      <td>21-Mar, 21-Sep</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>21-Jun-2051</td>
+      <td>1.75%</td>
+      <td>GSBK51</td>
+      <td>21-Jun, 21-Dec</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>At the time of writing there are <code class="docutils literal notranslate"><span class="pre">28</span></code> eTBs currently issued by the Australian Government.</p>
+</section>
+<section id="bond-value">
+<h2>Bond Value<a class="headerlink" href="#bond-value" title="Permalink to this headline">#</a></h2>
+<p>The function <code class="docutils literal notranslate"><span class="pre">etbListWithValueYield_AU()</span></code> returns the same dataframe with the following columns added:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">bond_value</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bond_value_yields</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bond_yields</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">netReturnOn_AUD1000</span></code></p></li>
+</ul>
+<p>Each entry depends on the bond’s current market price. The bond’s value and value yields and net return on <code class="docutils literal notranslate"><span class="pre">AUD1000</span></code> assume the bond holder buys the bond at the current market price and holds it to maturity.</p>
+<p>This function passes no arguments and uses Python’s web scraper package <code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code> to retrieve the bond’s current market price from Yahoo Finance. If values in any entry is is <code class="docutils literal notranslate"><span class="pre">nan</span></code>, it means Yahoo Finance did not have a record of this bond.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functions</span> <span class="kn">import</span> <span class="n">etbListWithValueYield_AU</span>
+
+<span class="n">etblist_value_yield</span> <span class="o">=</span> <span class="n">etbListWithValueYield_AU</span><span class="p">()</span>
+
+<span class="n">etblist_value_yield</span> <span class="o">=</span> <span class="n">etblist_value_yield</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">etblist_value_yield</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>maturity</th>
+      <th>coupon</th>
+      <th>ASX_code</th>
+      <th>payDates</th>
+      <th>bond_value</th>
+      <th>bond_value_yield</th>
+      <th>bond_yields</th>
+      <th>netReturnOn_AUD1000</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>21-Apr-2023</td>
+      <td>5.50%</td>
+      <td>GSBG23</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>-1.910</td>
+      <td>-1.87%</td>
+      <td>5.4%</td>
+      <td>-17.190</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>21-Apr-2024</td>
+      <td>2.75%</td>
+      <td>GSBG24</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>1.275</td>
+      <td>1.27%</td>
+      <td>2.75%</td>
+      <td>11.475</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21-Nov-2024</td>
+      <td>0.25%</td>
+      <td>GSBU24</td>
+      <td>21-May, 21-Nov</td>
+      <td>5.650</td>
+      <td>5.97%</td>
+      <td>0.26%</td>
+      <td>56.500</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>21-Apr-2025</td>
+      <td>3.25%</td>
+      <td>GSBG25</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>2.550</td>
+      <td>2.53%</td>
+      <td>3.23%</td>
+      <td>22.950</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>21-Nov-2025</td>
+      <td>0.25%</td>
+      <td>GSBU25</td>
+      <td>21-May, 21-Nov</td>
+      <td>8.375</td>
+      <td>9.1%</td>
+      <td>0.27%</td>
+      <td>83.750</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>21-Apr-2026</td>
+      <td>4.25%</td>
+      <td>GSBG26</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>2.955</td>
+      <td>2.86%</td>
+      <td>4.11%</td>
+      <td>26.595</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>21-Sep-2026</td>
+      <td>0.50%</td>
+      <td>GSBQ26</td>
+      <td>21-Sep, 21-Mar</td>
+      <td>9.820</td>
+      <td>10.8%</td>
+      <td>0.55%</td>
+      <td>98.200</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>21-Apr-2027</td>
+      <td>4.75%</td>
+      <td>GSBG27</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>2.910</td>
+      <td>2.73%</td>
+      <td>4.46%</td>
+      <td>26.190</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>21-Nov-2027</td>
+      <td>2.75%</td>
+      <td>GSBU27</td>
+      <td>21-Nov, 21-May</td>
+      <td>9.455</td>
+      <td>9.71%</td>
+      <td>2.82%</td>
+      <td>94.550</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>21-May-2028</td>
+      <td>2.25%</td>
+      <td>GSBI28</td>
+      <td>21-May, 21-Nov</td>
+      <td>10.855</td>
+      <td>11.45%</td>
+      <td>2.37%</td>
+      <td>108.550</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>21-Nov-2028</td>
+      <td>2.75%</td>
+      <td>GSBU28</td>
+      <td>21-Nov, 21-May</td>
+      <td>11.480</td>
+      <td>11.86%</td>
+      <td>2.84%</td>
+      <td>114.800</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>21-Apr-2029</td>
+      <td>3.25%</td>
+      <td>GSBG29</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>10.300</td>
+      <td>10.36%</td>
+      <td>3.27%</td>
+      <td>103.000</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>21-Nov-2029</td>
+      <td>2.75%</td>
+      <td>GSBU29</td>
+      <td>21-Nov, 21-May</td>
+      <td>14.275</td>
+      <td>14.97%</td>
+      <td>2.88%</td>
+      <td>142.750</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>21-May-2030</td>
+      <td>2.50%</td>
+      <td>GSBI30</td>
+      <td>21-May, 21-Nov</td>
+      <td>16.830</td>
+      <td>18.31%</td>
+      <td>2.72%</td>
+      <td>168.300</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>21-Dec-2030</td>
+      <td>1.00%</td>
+      <td>GSBW30</td>
+      <td>21-Dec, 21-Jun</td>
+      <td>22.250</td>
+      <td>27.22%</td>
+      <td>1.22%</td>
+      <td>267.000</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>21-Jun-2031</td>
+      <td>1.50%</td>
+      <td>GSBK31</td>
+      <td>21-Jun, 21-Dec</td>
+      <td>19.610</td>
+      <td>22.7%</td>
+      <td>1.74%</td>
+      <td>215.710</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>21-Nov-2031</td>
+      <td>1.00%</td>
+      <td>GSBU31</td>
+      <td>21-Nov, 21-May</td>
+      <td>24.690</td>
+      <td>30.94%</td>
+      <td>1.25%</td>
+      <td>296.280</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>21-May-2032</td>
+      <td>1.25%</td>
+      <td>GSBI32</td>
+      <td>21-May, 21-Nov</td>
+      <td>24.385</td>
+      <td>30.02%</td>
+      <td>1.54%</td>
+      <td>292.620</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>21-Nov-2032</td>
+      <td>1.75%</td>
+      <td>GSBU32</td>
+      <td>21-May, 21-Nov</td>
+      <td>24.330</td>
+      <td>28.82%</td>
+      <td>2.07%</td>
+      <td>267.630</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>21-Apr-2033</td>
+      <td>4.50%</td>
+      <td>GSBG33</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>16.100</td>
+      <td>15.13%</td>
+      <td>4.23%</td>
+      <td>144.900</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>21-Nov-2033</td>
+      <td>3.00%</td>
+      <td>GSBU33</td>
+      <td>21-Nov, 21-May</td>
+      <td>22.140</td>
+      <td>23.46%</td>
+      <td>3.18%</td>
+      <td>221.400</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>21-May-2034</td>
+      <td>3.75%</td>
+      <td>GSBI34</td>
+      <td>21-May, 21-Nov</td>
+      <td>22.855</td>
+      <td>23.38%</td>
+      <td>3.84%</td>
+      <td>228.550</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>21-Jun-2035</td>
+      <td>2.75%</td>
+      <td>GSBK35</td>
+      <td>21-Jun, 21-Dec</td>
+      <td>26.830</td>
+      <td>29.92%</td>
+      <td>3.07%</td>
+      <td>295.130</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>21-Apr-2037</td>
+      <td>3.75%</td>
+      <td>GSBG37</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>26.990</td>
+      <td>27.19%</td>
+      <td>3.78%</td>
+      <td>269.900</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>21-Jun-2039</td>
+      <td>3.25%</td>
+      <td>GSBK39</td>
+      <td>21-Jun, 21-Dec</td>
+      <td>35.320</td>
+      <td>38.95%</td>
+      <td>3.58%</td>
+      <td>388.520</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>21-May-2041</td>
+      <td>2.75%</td>
+      <td>GSBI41</td>
+      <td>21-May, 21-Nov</td>
+      <td>41.840</td>
+      <td>50.46%</td>
+      <td>3.32%</td>
+      <td>502.080</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>21-Mar-2047</td>
+      <td>3.00%</td>
+      <td>GSBE47</td>
+      <td>21-Mar, 21-Sep</td>
+      <td>51.360</td>
+      <td>60.68%</td>
+      <td>3.54%</td>
+      <td>564.960</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>21-Jun-2051</td>
+      <td>1.75%</td>
+      <td>GSBK51</td>
+      <td>21-Jun, 21-Dec</td>
+      <td>62.460</td>
+      <td>100.68%</td>
+      <td>2.82%</td>
+      <td>999.360</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Note.</strong> <em>If a value in the <code class="docutils literal notranslate"><span class="pre">bond_value</span></code> column is negative, it means the corresponding bond is overpriced in the market. One expects to <em>lose</em> money if one buys at the current market price and holdis it to maturity. This can also be seen in the column <code class="docutils literal notranslate"><span class="pre">netReturnOn_AUD1000</span></code>.</em></p>
+<p><strong>Note.</strong> <em>The bond value yield is a means of comparing bonds with differing maturities. It is used in calculating stock RROI.</em></p>
+<p>At time of writing the value of the longest maturity bond on the list, <code class="docutils literal notranslate"><span class="pre">GSBK51</span></code> is <code class="docutils literal notranslate"><span class="pre">62.46</span></code>. This means if we buy <code class="docutils literal notranslate"><span class="pre">100</span></code> units of <code class="docutils literal notranslate"><span class="pre">GSBK51</span></code>at the current market price, we will earn <code class="docutils literal notranslate"><span class="pre">62.46</span> <span class="pre">*</span> <span class="pre">100</span> <span class="pre">=</span> <span class="pre">6246</span></code> at maturity, being <code class="docutils literal notranslate"><span class="pre">21-Jun-2051</span></code>. Alternatively, if we invest <code class="docutils literal notranslate"><span class="pre">AUD1000</span></code>, this allows us to buy <code class="docutils literal notranslate"><span class="pre">AUD1000</span> <span class="pre">//</span> <span class="pre">current_market_price</span></code> many units. At time of writing, we see that <em>net</em> return will be <code class="docutils literal notranslate"><span class="pre">999.360</span></code>. So, by <code class="docutils literal notranslate"><span class="pre">21-Jun-2051</span></code>, the value of our investment in <code class="docutils literal notranslate"><span class="pre">GSBK51</span></code> will have (almost) doubled.</p>
+<p>Lastly, while the coupon on this bond is <code class="docutils literal notranslate"><span class="pre">1.75%</span></code> per year, it is trading at below face value. Its <em>yield</em> is therefore higher. We see it is <code class="docutils literal notranslate"><span class="pre">2.82%</span></code>.</p>
+</section>
+<section id="bond-list-with-run-rate">
+<h2>Bond list with Run Rate<a class="headerlink" href="#bond-list-with-run-rate" title="Permalink to this headline">#</a></h2>
+<p>A crucial component in the valuations above is the assumption the bond holder <em>holds to maturity</em>. Bonds which are closer to maturity ought to have lower value since their market price will tend to converge to face value at maturity. A better means of comparing bonds with differing maturities is then to simply correct for maturity, yielding a bond’s “run-rate”. That is, dividing their value by their time to maturity. A bond’s run rate is equivalently its net value <em>per unit time</em>, which we have annualised to <em>net value per year</em>.</p>
+<p><strong>Note.</strong> *While the value yield in the <code class="docutils literal notranslate"><span class="pre">bond_value_yield</span></code> column is another means of comparing bonds, we propose it is not as intuitive a measure as the run rate.</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">etbListWithValueYieldRunRate()</span></code> in <code class="docutils literal notranslate"><span class="pre">functions.py</span></code> returns the same data as <code class="docutils literal notranslate"><span class="pre">etbListWithValueYield_AU()</span></code> with an extra column recording the bond’s run rate. It does not pass any arguments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functions</span> <span class="kn">import</span> <span class="n">etbListWithValueYieldRunRate_AU</span>
+
+<span class="n">etblistvalue_yield_runrate</span> <span class="o">=</span> <span class="n">etbListWithValueYieldRunRate_AU</span><span class="p">()</span>
+
+<span class="n">etblistvalue_yield_runrate</span> <span class="o">=</span> <span class="n">etblistvalue_yield_runrate</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">etblistvalue_yield_runrate</span><span class="p">[[</span><span class="s1">&#39;ASX_code&#39;</span><span class="p">,</span> <span class="s1">&#39;runRate_annualised&#39;</span><span class="p">]]</span> <span class="c1"># displaying only the bond code and run rate</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ASX_code</th>
+      <th>runRate_annualised</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>GSBG23</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>GSBG24</td>
+      <td>2.550000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>GSBU24</td>
+      <td>5.650000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>GSBG25</td>
+      <td>2.550000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>GSBU25</td>
+      <td>5.583333</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>GSBG26</td>
+      <td>1.970000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>GSBQ26</td>
+      <td>6.546667</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>GSBG27</td>
+      <td>1.455000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>GSBU27</td>
+      <td>3.782000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>GSBI28</td>
+      <td>4.342000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>GSBU28</td>
+      <td>3.826667</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>GSBG29</td>
+      <td>3.433333</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>GSBU29</td>
+      <td>4.078571</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>GSBI30</td>
+      <td>4.808571</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>GSBW30</td>
+      <td>5.562500</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>GSBK31</td>
+      <td>4.902500</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>GSBU31</td>
+      <td>5.486667</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>GSBI32</td>
+      <td>5.418889</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>GSBU32</td>
+      <td>4.866000</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>GSBG33</td>
+      <td>3.220000</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>GSBU33</td>
+      <td>4.025455</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>GSBI34</td>
+      <td>4.155455</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>GSBK35</td>
+      <td>4.471667</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>GSBG37</td>
+      <td>3.855714</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>GSBK39</td>
+      <td>4.415000</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>GSBI41</td>
+      <td>4.648889</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>GSBE47</td>
+      <td>4.280000</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>GSBK51</td>
+      <td>4.461429</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Since the above is a pandas dataframe we can call the method <code class="docutils literal notranslate"><span class="pre">sort_values()</span></code> to reorder by <code class="docutils literal notranslate"><span class="pre">run_rate</span></code>. The highest value-per-unit-time bond is at the top; while the lowest is at the bottom.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">etblistvalue_yield_runrate</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;runRate_annualised&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>maturity</th>
+      <th>coupon</th>
+      <th>ASX_code</th>
+      <th>payDates</th>
+      <th>bond_value</th>
+      <th>bond_value_yield</th>
+      <th>bond_yields</th>
+      <th>netReturnOn_AUD1000</th>
+      <th>runRate_annualised</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>21-Sep-2026</td>
+      <td>0.50%</td>
+      <td>GSBQ26</td>
+      <td>21-Sep, 21-Mar</td>
+      <td>9.820</td>
+      <td>10.8%</td>
+      <td>0.55%</td>
+      <td>98.200</td>
+      <td>6.546667</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>21-Nov-2024</td>
+      <td>0.25%</td>
+      <td>GSBU24</td>
+      <td>21-May, 21-Nov</td>
+      <td>5.650</td>
+      <td>5.97%</td>
+      <td>0.26%</td>
+      <td>56.500</td>
+      <td>5.650000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21-Nov-2025</td>
+      <td>0.25%</td>
+      <td>GSBU25</td>
+      <td>21-May, 21-Nov</td>
+      <td>8.375</td>
+      <td>9.1%</td>
+      <td>0.27%</td>
+      <td>83.750</td>
+      <td>5.583333</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>21-Dec-2030</td>
+      <td>1.00%</td>
+      <td>GSBW30</td>
+      <td>21-Dec, 21-Jun</td>
+      <td>22.250</td>
+      <td>27.22%</td>
+      <td>1.22%</td>
+      <td>267.000</td>
+      <td>5.562500</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>21-Nov-2031</td>
+      <td>1.00%</td>
+      <td>GSBU31</td>
+      <td>21-Nov, 21-May</td>
+      <td>24.690</td>
+      <td>30.94%</td>
+      <td>1.25%</td>
+      <td>296.280</td>
+      <td>5.486667</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>21-May-2032</td>
+      <td>1.25%</td>
+      <td>GSBI32</td>
+      <td>21-May, 21-Nov</td>
+      <td>24.385</td>
+      <td>30.02%</td>
+      <td>1.54%</td>
+      <td>292.620</td>
+      <td>5.418889</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>21-Jun-2031</td>
+      <td>1.50%</td>
+      <td>GSBK31</td>
+      <td>21-Jun, 21-Dec</td>
+      <td>19.610</td>
+      <td>22.7%</td>
+      <td>1.74%</td>
+      <td>215.710</td>
+      <td>4.902500</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>21-Nov-2032</td>
+      <td>1.75%</td>
+      <td>GSBU32</td>
+      <td>21-May, 21-Nov</td>
+      <td>24.330</td>
+      <td>28.82%</td>
+      <td>2.07%</td>
+      <td>267.630</td>
+      <td>4.866000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>21-May-2030</td>
+      <td>2.50%</td>
+      <td>GSBI30</td>
+      <td>21-May, 21-Nov</td>
+      <td>16.830</td>
+      <td>18.31%</td>
+      <td>2.72%</td>
+      <td>168.300</td>
+      <td>4.808571</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>21-May-2041</td>
+      <td>2.75%</td>
+      <td>GSBI41</td>
+      <td>21-May, 21-Nov</td>
+      <td>41.840</td>
+      <td>50.46%</td>
+      <td>3.32%</td>
+      <td>502.080</td>
+      <td>4.648889</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>21-Jun-2035</td>
+      <td>2.75%</td>
+      <td>GSBK35</td>
+      <td>21-Jun, 21-Dec</td>
+      <td>26.830</td>
+      <td>29.92%</td>
+      <td>3.07%</td>
+      <td>295.130</td>
+      <td>4.471667</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>21-Jun-2051</td>
+      <td>1.75%</td>
+      <td>GSBK51</td>
+      <td>21-Jun, 21-Dec</td>
+      <td>62.460</td>
+      <td>100.68%</td>
+      <td>2.82%</td>
+      <td>999.360</td>
+      <td>4.461429</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>21-Jun-2039</td>
+      <td>3.25%</td>
+      <td>GSBK39</td>
+      <td>21-Jun, 21-Dec</td>
+      <td>35.320</td>
+      <td>38.95%</td>
+      <td>3.58%</td>
+      <td>388.520</td>
+      <td>4.415000</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>21-May-2028</td>
+      <td>2.25%</td>
+      <td>GSBI28</td>
+      <td>21-May, 21-Nov</td>
+      <td>10.855</td>
+      <td>11.45%</td>
+      <td>2.37%</td>
+      <td>108.550</td>
+      <td>4.342000</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>21-Mar-2047</td>
+      <td>3.00%</td>
+      <td>GSBE47</td>
+      <td>21-Mar, 21-Sep</td>
+      <td>51.360</td>
+      <td>60.68%</td>
+      <td>3.54%</td>
+      <td>564.960</td>
+      <td>4.280000</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>21-May-2034</td>
+      <td>3.75%</td>
+      <td>GSBI34</td>
+      <td>21-May, 21-Nov</td>
+      <td>22.855</td>
+      <td>23.38%</td>
+      <td>3.84%</td>
+      <td>228.550</td>
+      <td>4.155455</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>21-Nov-2029</td>
+      <td>2.75%</td>
+      <td>GSBU29</td>
+      <td>21-Nov, 21-May</td>
+      <td>14.275</td>
+      <td>14.97%</td>
+      <td>2.88%</td>
+      <td>142.750</td>
+      <td>4.078571</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>21-Nov-2033</td>
+      <td>3.00%</td>
+      <td>GSBU33</td>
+      <td>21-Nov, 21-May</td>
+      <td>22.140</td>
+      <td>23.46%</td>
+      <td>3.18%</td>
+      <td>221.400</td>
+      <td>4.025455</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>21-Apr-2037</td>
+      <td>3.75%</td>
+      <td>GSBG37</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>26.990</td>
+      <td>27.19%</td>
+      <td>3.78%</td>
+      <td>269.900</td>
+      <td>3.855714</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>21-Nov-2028</td>
+      <td>2.75%</td>
+      <td>GSBU28</td>
+      <td>21-Nov, 21-May</td>
+      <td>11.480</td>
+      <td>11.86%</td>
+      <td>2.84%</td>
+      <td>114.800</td>
+      <td>3.826667</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>21-Nov-2027</td>
+      <td>2.75%</td>
+      <td>GSBU27</td>
+      <td>21-Nov, 21-May</td>
+      <td>9.455</td>
+      <td>9.71%</td>
+      <td>2.82%</td>
+      <td>94.550</td>
+      <td>3.782000</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>21-Apr-2029</td>
+      <td>3.25%</td>
+      <td>GSBG29</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>10.300</td>
+      <td>10.36%</td>
+      <td>3.27%</td>
+      <td>103.000</td>
+      <td>3.433333</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>21-Apr-2033</td>
+      <td>4.50%</td>
+      <td>GSBG33</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>16.100</td>
+      <td>15.13%</td>
+      <td>4.23%</td>
+      <td>144.900</td>
+      <td>3.220000</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>21-Apr-2024</td>
+      <td>2.75%</td>
+      <td>GSBG24</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>1.275</td>
+      <td>1.27%</td>
+      <td>2.75%</td>
+      <td>11.475</td>
+      <td>2.550000</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>21-Apr-2025</td>
+      <td>3.25%</td>
+      <td>GSBG25</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>2.550</td>
+      <td>2.53%</td>
+      <td>3.23%</td>
+      <td>22.950</td>
+      <td>2.550000</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>21-Apr-2026</td>
+      <td>4.25%</td>
+      <td>GSBG26</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>2.955</td>
+      <td>2.86%</td>
+      <td>4.11%</td>
+      <td>26.595</td>
+      <td>1.970000</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>21-Apr-2027</td>
+      <td>4.75%</td>
+      <td>GSBG27</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>2.910</td>
+      <td>2.73%</td>
+      <td>4.46%</td>
+      <td>26.190</td>
+      <td>1.455000</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>21-Apr-2023</td>
+      <td>5.50%</td>
+      <td>GSBG23</td>
+      <td>21-Apr, 21-Oct</td>
+      <td>-1.910</td>
+      <td>-1.87%</td>
+      <td>5.4%</td>
+      <td>-17.190</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>At time of writing it is interesting to note, while the coupon and yield of bonds <code class="docutils literal notranslate"><span class="pre">GSBU24</span></code> and <code class="docutils literal notranslate"><span class="pre">GSBQ26</span></code> are quite low compared to others, they nevertheless have high run rates. This is due to these bonds currently trading at market price <em>below</em> face value in addition to having a relatively soons maturities.</p>
+<p>And so, while its yields are low, the above result suggests <code class="docutils literal notranslate"><span class="pre">GSBU24</span></code> and <code class="docutils literal notranslate"><span class="pre">GSBQ26</span></code> are good buys when its market price, face value and maturity are considered.</p>
+</section>
+<section id="yield-curve">
+<h2>Yield curve<a class="headerlink" href="#yield-curve" title="Permalink to this headline">#</a></h2>
+<p>In the module <code class="docutils literal notranslate"><span class="pre">yield_sketch.py</span></code> the function <code class="docutils literal notranslate"><span class="pre">sketch_yields()</span></code> uses the Python plotting package <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> to display the yield curve graph. It is a sketch of bond yields against bonds. Superimposed on the graph is the regression line, which is sketched using the Python package <code class="docutils literal notranslate"><span class="pre">scipy</span></code>. The yield curve is said to be <em>inverted</em> if the slope of the regression line is negative, meaning yields of longer term maturity bonds are, on average, lower than the shorter term maturities.</p>
+<p>Inverted yields are indicative of upcoming recessions, apparently.</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">sketch_yields()</span></code> does not pass any arguments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">yield_sketch</span> <span class="kn">import</span> <span class="n">sketch_yields</span>
+
+<span class="n">sketch_yields</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bonds_tutorial_13_0.png" src="_images/bonds_tutorial_13_0.png" />
+</div>
+</div>
+<p>At time of writing, the current yield curve regression slope is <code class="docutils literal notranslate"><span class="pre">0.0314</span></code>. This is positive, meaning the yield curve is <em>not</em> inverted.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="RROIB_ntbk.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Stock RROI relative to bonds (theory)</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="RROIB_tutorial.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Stocks to bonds RROI/B tutorial</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Kowshik Bettadapura<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

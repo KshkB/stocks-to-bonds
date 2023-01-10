@@ -1,0 +1,885 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Stock RROI relative to bonds (theory) &#8212; Bond valuation and stock RROI</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="shortcut icon" href="_static/brand.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bond valuation tutorial" href="bonds_tutorial.html" />
+    <link rel="prev" title="Bond valuation and stock RROI" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/brand.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Bond valuation and stock RROI</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bond valuation and stock RROI
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Stock RROI relative to bonds (theory)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bonds_tutorial.html">
+   Bond valuation tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="RROIB_tutorial.html">
+   Stocks to bonds RROI/B tutorial
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/KshkB/stocks-to-bonds/master?urlpath=tree/docs/RROIB_ntbk.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/KshkB/stocks-to-bonds/tree/gh-pages"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/KshkB/stocks-to-bonds/tree/gh-pages/issues/new?title=Issue%20on%20page%20%2FRROIB_ntbk.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/RROIB_ntbk.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bond-returns">
+   Bond returns
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stock-returns">
+   Stock returns
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#indifference-equation">
+   Indifference equation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-rroi-b">
+     The RROI/B
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interpretation">
+     Interpretation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rroi-b-solutions">
+   RROI/B solutions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pure-growth">
+     Pure growth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#special-maturities">
+     Special maturities
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#for-t-1">
+       For
+       <span class="math notranslate nohighlight">
+        \(T = 1\)
+       </span>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#for-t-2">
+       For
+       <span class="math notranslate nohighlight">
+        \(T = 2\)
+       </span>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quadratic-approximation">
+     Quadratic approximation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rroi-b-adjusted-price-to-earnings">
+   RROI/B-adjusted price to earnings
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classical-price-to-earnings">
+     Classical price-to-earnings
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adjusting-for-the-bond">
+     Adjusting for the bond
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#excess">
+     Excess
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Stock RROI relative to bonds (theory)</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bond-returns">
+   Bond returns
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stock-returns">
+   Stock returns
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#indifference-equation">
+   Indifference equation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-rroi-b">
+     The RROI/B
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interpretation">
+     Interpretation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rroi-b-solutions">
+   RROI/B solutions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pure-growth">
+     Pure growth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#special-maturities">
+     Special maturities
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#for-t-1">
+       For
+       <span class="math notranslate nohighlight">
+        \(T = 1\)
+       </span>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#for-t-2">
+       For
+       <span class="math notranslate nohighlight">
+        \(T = 2\)
+       </span>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quadratic-approximation">
+     Quadratic approximation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rroi-b-adjusted-price-to-earnings">
+   RROI/B-adjusted price to earnings
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classical-price-to-earnings">
+     Classical price-to-earnings
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adjusting-for-the-bond">
+     Adjusting for the bond
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#excess">
+     Excess
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="stock-rroi-relative-to-bonds-theory">
+<h1>Stock RROI relative to bonds (theory)<a class="headerlink" href="#stock-rroi-relative-to-bonds-theory" title="Permalink to this headline">#</a></h1>
+<section id="bond-returns">
+<h2>Bond returns<a class="headerlink" href="#bond-returns" title="Permalink to this headline">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(B\)</span> be a bond with coupon <span class="math notranslate nohighlight">\(c\)</span>, face value <span class="math notranslate nohighlight">\(f\)</span>, market price <span class="math notranslate nohighlight">\(p\)</span> with <span class="math notranslate nohighlight">\(T\)</span> payment periods to maturity. The net returns on holding this bond to maturity, <span class="math notranslate nohighlight">\(r_B\)</span>, is</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+r_B = -p + (1 + cT)f.
+\end{align}
+\]</div>
+<p>That is, the holder pays a price <span class="math notranslate nohighlight">\(p\)</span>, collects <span class="math notranslate nohighlight">\(T\)</span>-many coupons <span class="math notranslate nohighlight">\(cf\)</span> and the face value <span class="math notranslate nohighlight">\(f\)</span> at maturity.</p>
+</section>
+<section id="stock-returns">
+<h2>Stock returns<a class="headerlink" href="#stock-returns" title="Permalink to this headline">#</a></h2>
+<p>Consider a stock <span class="math notranslate nohighlight">\(S\)</span>. It is defined by its current market price <span class="math notranslate nohighlight">\(P\)</span> and dividend yield <span class="math notranslate nohighlight">\(\delta\)</span>. Let <span class="math notranslate nohighlight">\(g\)</span> be its expected rate of growth per period. After <span class="math notranslate nohighlight">\(T\)</span> many periods, assuming the stockholder sells the stock, their net return <span class="math notranslate nohighlight">\(r_S\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+r_S
+&amp;=
+-P + \delta P\sum_{n=0}^{T-1} (1 + g)^n + P(1 + g)^T
+\\
+&amp;= 
+-P - \delta P\frac{1 - (1 + g)^T}{g} + P(1 + g)^T
+\\
+&amp;= 
+P
+\frac{(g + \delta)((1 + g)^T - 1)}{g}
+\end{align}
+\end{split}\]</div>
+</section>
+<section id="indifference-equation">
+<h2>Indifference equation<a class="headerlink" href="#indifference-equation" title="Permalink to this headline">#</a></h2>
+<section id="the-rroi-b">
+<h3>The RROI/B<a class="headerlink" href="#the-rroi-b" title="Permalink to this headline">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(I\)</span> be an investment amount. With respect to a bond <span class="math notranslate nohighlight">\(B\)</span> and dividend yield <span class="math notranslate nohighlight">\(\delta\)</span>, <em>at what growth <span class="math notranslate nohighlight">\(g\)</span> will an investor be indifferent between investing in the bond or in stock?</em> Investing in the bond till maturity, the bond holder generates returns <span class="math notranslate nohighlight">\(r_B(I)\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+r_B(I)
+&amp;=
+-\frac{I}{p}p + (1 + cT)\frac{I}{p}f
+\\
+&amp;= 
+-I + (1 + cT)\frac{f}{p}I.
+\end{align}
+\end{split}\]</div>
+<p>Net returns on the stock, holding for <span class="math notranslate nohighlight">\(T\)</span> periods then selling, generates returns <span class="math notranslate nohighlight">\(r_S(I)\)</span> where,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+r_S(I)
+&amp;=
+-\frac{I}{P}P + \frac{I}{P}\delta P\sum_{n= 0}^{T-1}(1 + g)^n + \frac{I}{P}P(1 + g)^T
+\\
+&amp;= 
+I
+\frac{(g + \delta)((1 + g)^T - 1)}{g}.
+\end{align}
+\end{split}\]</div>
+<p>Notice that <span class="math notranslate nohighlight">\(r_B(I) = I\cdot r_B(1)\)</span> and <span class="math notranslate nohighlight">\(r_S(I) = I\cdot r_S(1)\)</span>. Equating <span class="math notranslate nohighlight">\(r_B(I) = r_S(I)\)</span> then, <span class="math notranslate nohighlight">\(I\)</span> factors this equation. Hence, the investment amount <span class="math notranslate nohighlight">\(I\)</span> is not itself relevant. Rather, we obtain the equation</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+-1 + (1 + cT)\frac{f}{p}
+=
+\frac{(g + \delta)((1 + g)^T - 1)}{g}.
+\end{align}
+\]</div>
+<p>The left-hand side above is <span class="math notranslate nohighlight">\(r_B(1)\)</span>.</p>
+<p><strong>Remark.</strong> <em>The bond yield is <span class="math notranslate nohighlight">\(\gamma = cf/p\)</span> so that we can write in terms of the bond yield, <span class="math notranslate nohighlight">\(r_B(1) = -1 + (1 + \gamma)T\)</span>.</em></p>
+<p>The indifference equation is the following polynomial equation for <span class="math notranslate nohighlight">\(g\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+g(1 + g)^T + \delta (1 + g)^T - (r_B(1) + 1)g - \delta = 0.
+\end{align}
+\]</div>
+<p>It appears as though we have a degree <span class="math notranslate nohighlight">\((T+1)\)</span>-equation for <span class="math notranslate nohighlight">\(g\)</span>. Observe however that the constant term <span class="math notranslate nohighlight">\(\delta\)</span> will cancel out so that <span class="math notranslate nohighlight">\(g\)</span> factors the above equation. Dividing through by <span class="math notranslate nohighlight">\(g\)</span>, assuming <span class="math notranslate nohighlight">\(g\neq 0\)</span>, will therefore give a degree <span class="math notranslate nohighlight">\(T\)</span> equation.</p>
+<p><strong>Definition.</strong> <em>A solution <span class="math notranslate nohighlight">\(g\)</span> to the indifference equation is referred to as the <strong>required return on investment relative to</strong> <span class="math notranslate nohighlight">\(B\)</span></em>, or <strong>RROI/B</strong>.</p>
+</section>
+<section id="interpretation">
+<h3>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this headline">#</a></h3>
+<p>To reiterate, the RROI/B is the required return on investment relative to a fixed bond <span class="math notranslate nohighlight">\(B\)</span>. It is the <em>minimum</em> return an investor ought to expect from owning stock in order to justify their investment in stock for <span class="math notranslate nohighlight">\(T\)</span> time periods instead of the bond <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<p>Note, the RROI/B does not indicate valuation of any stock in particular; it is a perhaps more useful as a measure of the stock market as a whole (e.g., market index). And so we might conclude, <em>in order for the stock market to be <strong>investible</strong> for <span class="math notranslate nohighlight">\(T\)</span> periods of time, it needs to grow an an average rate of <span class="math notranslate nohighlight">\(g\)</span> per period at dividend yield (or, distribution) <span class="math notranslate nohighlight">\(\delta\)</span>.</em></p>
+<p>Notice that the dividend yield enters the indifference equation positively. Hence, increasing <span class="math notranslate nohighlight">\(\delta\)</span> entails decreasing <span class="math notranslate nohighlight">\(g\)</span> in order to mainain equality. This is as one might expect: dividend yield <span class="math notranslate nohighlight">\(\delta\)</span> is inversely related to growth <span class="math notranslate nohighlight">\(g\)</span>.</p>
+</section>
+</section>
+<section id="rroi-b-solutions">
+<h2>RROI/B solutions<a class="headerlink" href="#rroi-b-solutions" title="Permalink to this headline">#</a></h2>
+<section id="pure-growth">
+<h3>Pure growth<a class="headerlink" href="#pure-growth" title="Permalink to this headline">#</a></h3>
+<p>Pure growth stocks are those which pay no dividends. Accordingly, the dividend yield for such stocks is <span class="math notranslate nohighlight">\(\delta = 0\)</span>. In this case we obtain from the indifference equation</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+g(1 + g)^T - (r_B(1) + 1)g = 0
+\end{align}
+\]</div>
+<p>so that</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+g 
+= 
+\left(r_B(1) + 1\right)^{\frac{1}{T}} - 1.
+\end{align}
+\]</div>
+<p>This is an exact solution for the RROI/B.</p>
+</section>
+<section id="special-maturities">
+<h3>Special maturities<a class="headerlink" href="#special-maturities" title="Permalink to this headline">#</a></h3>
+<p>Note, for <span class="math notranslate nohighlight">\(T = 0\)</span> we get RROI/B, <span class="math notranslate nohighlight">\(g = 0\)</span>.</p>
+<section id="for-t-1">
+<h4>For <span class="math notranslate nohighlight">\(T = 1\)</span><a class="headerlink" href="#for-t-1" title="Permalink to this headline">#</a></h4>
+<p>The indifference equation becomes</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+g (1 + g) + \delta (1 + g) - (r_B(1) + 1)g - \delta = 0.
+\end{align}
+\]</div>
+<p>Simplifying and solving for <span class="math notranslate nohighlight">\(g\)</span> gives,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+g = r_B(1) - \delta.
+\end{align}
+\]</div>
+</section>
+<section id="for-t-2">
+<h4>For <span class="math notranslate nohighlight">\(T = 2\)</span><a class="headerlink" href="#for-t-2" title="Permalink to this headline">#</a></h4>
+<p>From the indifference equation we get,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+g^2 + (2 + \delta)g + (2\delta - r_B(1)) = 0.
+\end{align}
+\]</div>
+<p>And so by the quadratic formula we find solutions</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+g_\pm
+&amp;=
+\frac{-(2 + \delta) \pm \sqrt{(2 + \delta)^2 - 4(2\delta - r_B(1))}}{2}
+\\
+&amp;= 
+\frac{-(2 + \delta) \pm \sqrt{(2 - \delta)^2 + 4r_B(1))}}{2}.
+\end{align}
+\end{split}\]</div>
+<p>See that while <span class="math notranslate nohighlight">\(g_\pm\)</span> need not be positive, it will nevertheless be real if <span class="math notranslate nohighlight">\(r_B(1)\geq 0\)</span>. That is, when the bond price to face value ratio is less than its returns in coupons, i.e., <span class="math notranslate nohighlight">\(\frac{p}{f} \leq 1 + 2c\)</span>.</p>
+<p>Conservatively, the RROI/B in this case is taken to be the larger of the two solutions, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+g = g_+ = \frac{-(2 + \delta) + \sqrt{(2 - \delta)^2 + 4r_B(1))}}{2}.
+\end{align}
+\]</div>
+<p>Analytic solutions exist for maturities <span class="math notranslate nohighlight">\(T = 3, 4\)</span>; however for <span class="math notranslate nohighlight">\(T\geq 5\)</span> it becomes a challenging problem for the pure mathematician. We leave the case <span class="math notranslate nohighlight">\(T = 3, 4\)</span> to the enterprising reader.</p>
+</section>
+</section>
+<section id="quadratic-approximation">
+<h3>Quadratic approximation<a class="headerlink" href="#quadratic-approximation" title="Permalink to this headline">#</a></h3>
+<p>Since <span class="math notranslate nohighlight">\(T\)</span> is integral (i.e., an integer) the binomial expansion gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+(1 + g)^T 
+&amp;= 
+\sum_{n=0}^T \binom{T}{n}g^n
+\\
+&amp;= 
+\binom{T}{0}1 + \binom{T}{1}g + \binom{T}{2}g^2 + \cdots + \binom{T}{T}g^T
+\end{align}
+\end{split}\]</div>
+<p>where the coefficients are binomials. Set <span class="math notranslate nohighlight">\(x^3\equiv 0\)</span> so that, to <em>quadratic order</em>,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+f(x) 
+=
+1 
++ Tx
++ \binom{T}{2}x^2
+&amp;&amp;
+\mbox{with error $x^3$.}
+\end{align}
+\]</div>
+<p>Applying this approximation to the indifference equation gives the <em>approximate</em> indifference equation</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\binom{T}{2}g^2 + \left(T + \binom{T}{2}\delta\right)g + (T\delta - r_B(1)) = 0.
+\end{align}
+\]</div>
+<p>We obtain through the quadratic equation therefore, just as above,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+g_\pm
+&amp;=
+\frac{ - \left(T + \binom{T}{2}\delta\right) \pm \sqrt{ \left(T + \binom{T}{2}\delta\right)^2 - 4\binom{T}{2}(T\delta - r_B(1)) }}{2\binom{T}{2}}
+\\
+&amp;=
+\frac{ - \left(T + \binom{T}{2}\delta\right) \pm \sqrt{ \left(T - \binom{T}{2}\delta\right)^2 + 4\binom{T}{2} r_B(1) }}{2\binom{T}{2}}
+&amp;&amp;
+\mbox{with error $g_\pm^3$.}
+\end{align}
+\end{split}\]</div>
+<p>Observe again that <span class="math notranslate nohighlight">\(g_\pm\)</span> is guaranteed to be real for <span class="math notranslate nohighlight">\(r_B(1)\geq0\)</span>, i.e., for bond price-to-face ratio <span class="math notranslate nohighlight">\(\frac{p}{f} \leq 1 + cT\)</span>. The RROI/B in this case is therefore</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+g = g_+ = \frac{ - \left(T + \binom{T}{2}\delta\right) + \sqrt{ \left(T - \binom{T}{2}\delta\right)^2 + 4\binom{T}{2} r_B(1) }}{2\binom{T}{2}}
+&amp;&amp;
+\mbox{with error $g_\pm^3$.}
+\end{align}
+\]</div>
+<p>Note, we can obtain more accurate estimates by using the cubic or quartic formula. An exercise again for the enterprising reader.</p>
+</section>
+</section>
+<section id="rroi-b-adjusted-price-to-earnings">
+<h2>RROI/B-adjusted price to earnings<a class="headerlink" href="#rroi-b-adjusted-price-to-earnings" title="Permalink to this headline">#</a></h2>
+<section id="classical-price-to-earnings">
+<h3>Classical price-to-earnings<a class="headerlink" href="#classical-price-to-earnings" title="Permalink to this headline">#</a></h3>
+<p>The RROI/B above is a minimum measure of growth required for any company in order for it to be investible over the bond. As for a particular public company, let <span class="math notranslate nohighlight">\(P\)</span> be its market price and <span class="math notranslate nohighlight">\(E\)</span> its earnings per share per unit time. Then the <em>price earnings ratio</em> <span class="math notranslate nohighlight">\(P/E\)</span> has units of time. It represents the following: <em>if the company were to generate earnings <span class="math notranslate nohighlight">\(E\)</span> each period, it would take <span class="math notranslate nohighlight">\(P/E\)</span>-many periods of time to recoup the initial investment <span class="math notranslate nohighlight">\(P\)</span></em>. The equation being for an investor,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+- P + \frac{P}{E}E = 0
+\iff 
+- P + \overbrace{E + E + \cdots + E}^{\scriptsize \frac{P}{E}\mbox{-times}} = 0.
+\end{align}
+\]</div>
+</section>
+<section id="adjusting-for-the-bond">
+<h3>Adjusting for the bond<a class="headerlink" href="#adjusting-for-the-bond" title="Permalink to this headline">#</a></h3>
+<p>Consider instead the case where company earnings grow at the RROI/B <span class="math notranslate nohighlight">\(g\)</span> from above for a fixed bond <span class="math notranslate nohighlight">\(B\)</span>. The above series is the case where <span class="math notranslate nohighlight">\(g = 0\)</span>. Generally we have</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+-P + E + (1 + g)E + (1 + g)^2 E + \cdots + (1 + g)^{T^*-1}E = 0.
+\end{align}
+\]</div>
+<p>The earnings <span class="math notranslate nohighlight">\(E\)</span> above is the <em>forward</em> earnings. Accordingly, we refer to the time <span class="math notranslate nohighlight">\(T^*\)</span> as the <em>forward RROI/B-adjusted price-earnings ratio</em>. Solving for it gives,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+T^*
+= 
+\frac{ \log\left(1 + \frac{P}{E}g \right) }{ \log(1 + g) }.
+\end{align}
+\]</div>
+<p>Recall that <span class="math notranslate nohighlight">\(g\)</span> was obtained by choosing a bond <span class="math notranslate nohighlight">\(B\)</span> with maturity <span class="math notranslate nohighlight">\(T\)</span>. The above says: <em>if we were to invest at price <span class="math notranslate nohighlight">\(P\)</span> into a stock with forward earnings <span class="math notranslate nohighlight">\(E\)</span>, then assuming it grows at the RROI/B <span class="math notranslate nohighlight">\(g\)</span>, we will recoup our initial investment after <span class="math notranslate nohighlight">\(T^*\)</span>-many years.</em></p>
+<p><strong>Note.</strong> <em>Observe that <span class="math notranslate nohighlight">\(\log(1) = 0\)</span>, so setting <span class="math notranslate nohighlight">\(g = 0\)</span> in the expression for <span class="math notranslate nohighlight">\(T^*\)</span> above is ill-defined. The indeterminate form is <span class="math notranslate nohighlight">\(0/0\)</span> however so, by the I’Hopital rule, we can evauate the limit <span class="math notranslate nohighlight">\(g\rightarrow 0\)</span> by first differentiating the numerator and denominator with respect to <span class="math notranslate nohighlight">\(g\)</span>. In doing so, <span class="math notranslate nohighlight">\(T^*\)</span> will limit to <span class="math notranslate nohighlight">\(P/E\)</span> as <span class="math notranslate nohighlight">\(g \rightarrow 0\)</span> as expected.</em></p>
+</section>
+<section id="excess">
+<h3>Excess<a class="headerlink" href="#excess" title="Permalink to this headline">#</a></h3>
+<p>Set <span class="math notranslate nohighlight">\(T^{**} = T - T^*\)</span>. We refer to <span class="math notranslate nohighlight">\(T^{**}\)</span> as the <em>excess time</em>. Recall, assuming the company grows at the RROI/B, the investor will expect to recoup their investment <span class="math notranslate nohighlight">\(P\)</span> purely through earnings after time <span class="math notranslate nohighlight">\(T^*\)</span>. The excess time <span class="math notranslate nohighlight">\(T^{**}\)</span> is therefore the period of time over which the investor expects to make net positive returns on their investment in the stock through proportionate access to earnings (e.g., by way of dividends) relative to the bond maturity.</p>
+<p>We can conclude therefore:</p>
+<ul class="simple">
+<li><p>if <span class="math notranslate nohighlight">\(T^{**} &lt; 0\)</span>, the investor is better off investing in the bond;</p></li>
+<li><p>if <span class="math notranslate nohighlight">\(T^{**} &gt; 0\)</span> the investor <em>may</em> prefer the stock over the bond.</p></li>
+</ul>
+<p><strong>Note.</strong> <em>We do not account for the investor selling their stock to realise gains or losses.</em></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Bond valuation and stock RROI</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="bonds_tutorial.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bond valuation tutorial</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Kowshik Bettadapura<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
